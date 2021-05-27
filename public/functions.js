@@ -13,8 +13,18 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const database = firebase.firestore();
 const usersCollection = database.collection('users');
+var info;
+usersCollection.where("email", "==", "kevinbullock3@gmail.com").get()
+.then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        info = doc.data();
+    });
+})
+.catch((error) => {
+    console.log("Error getting documents: ", error);
+});
 
-var info = usersCollection.where("email", "==", "kevinbullock3@gmail.com").get();
 
 window.addEventListener("load", function () {
     addInfoTest();
