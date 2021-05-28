@@ -13,25 +13,24 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const database = firebase.firestore();
 const usersCollection = database.collection('users');
-var info;
-usersCollection.where("email", "==", "kevinbullock3@gmail.com").get()
-.then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        info = doc.data();
-    });
-})
-.catch((error) => {
-    console.log("Error getting documents: ", error);
-});
-
 
 window.addEventListener("load", function () {
     addInfoTest();
 })
 
 function addInfoTest(){
+    var info;
+    usersCollection.where("email", "==", "kevinbullock3@gmail.com").get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            info = doc.data();
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
     var divElement = document.createElement('div');
-    divElement.innerHTML = info;
+    divElement.innerHTML = info.email+"\n"+info.phone+"\n"+info.firstName+"\n"+info.lastName;
     document.body.appendChild(divElement);
 }
