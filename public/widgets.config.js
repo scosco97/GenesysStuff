@@ -1,6 +1,12 @@
 window._genesys = {
     widgets: {
+      main: {
+                preload: ['webchat'],
+            },
       webchat: {
+        chatButton: {
+            enabled: true, // (boolean) Enable/disable chat button on screen.
+          },
         transport: {
           type: 'purecloud-v2-sockets',
           dataURL: 'https://api.usw2.pure.cloud',     // replace with API URL matching your region
