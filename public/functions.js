@@ -30,28 +30,13 @@ window.addEventListener("load", function () {
 })
 
 function getCustomerDataByEmail(address){
-    var containerUserElement = document.createElement('div');
-    containerUserElement.id = 'Customer';
-    document.body.appendChild(containerUserElement);
-    var custName = document.createElement('div');
-    custName.class = "CustomerName";
-    containerUserElement.appendChild(custName);
-    var custMail = document.createElement('div');
-    custMail.class = 'CustomerEmail';
-    containerUserElement.appendChild(custMail);
-    var custPhone = document.createElement('div');
-    custPhone.class = 'CustomerPhone';
-    containerUserElement.appendChild(custPhone);
-
-
+    
     usersCollection.where("email", "==", address).get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             var info = doc.data();
-            custName.innerText = info.firstName +" "+info.lastName;
-            custMail.innerText = info.email;
-            custPhone.innerText = info.phone;
+            createUserElements(info.firstName+" "+info.lastName, info.email, info.phone);
 
             doc.ref.collection("Order History").get().then(function (orderQuery){
                 orderQuery.forEach((order) => {
@@ -71,28 +56,13 @@ function getCustomerDataByEmail(address){
 }
 
 function getCustomerDataByPhone(number){
-    var containerUserElement = document.createElement('div');
-    containerUserElement.id = 'Customer';
-    document.body.appendChild(containerUserElement);
-    var custName = document.createElement('div');
-    custName.class = "CustomerName";
-    containerUserElement.appendChild(custName);
-    var custMail = document.createElement('div');
-    custMail.class = 'CustomerEmail';
-    containerUserElement.appendChild(custMail);
-    var custPhone = document.createElement('div');
-    custPhone.class = 'CustomerPhone';
-    containerUserElement.appendChild(custPhone);
-
-
+    
     usersCollection.where("phone", "==", number).get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             var info = doc.data();
-            custName.innerText = info.firstName +" "+info.lastName;
-            custMail.innerText = info.email;
-            custPhone.innerText = info.phone;
+            createUserElements(info.firstName+" "+info.lastName, info.email, info.phone);
 
             doc.ref.collection("Order History").get().then(function (orderQuery){
                 orderQuery.forEach((order) => {
@@ -109,6 +79,27 @@ function getCustomerDataByPhone(number){
         console.log("Error getting documents: ", error);
     });
     
+}
+
+
+function createUserElements(name, email, phone){
+    
+    var containerUserElement = document.createElement('div');
+    containerUserElement.id = 'Customer';
+    document.body.appendChild(containerUserElement);
+    var custName = document.createElement('div');
+    custName.class = "CustomerName";
+    containerUserElement.appendChild(custName);
+    var custMail = document.createElement('div');
+    custMail.class = 'CustomerEmail';
+    containerUserElement.appendChild(custMail);
+    var custPhone = document.createElement('div');
+    custPhone.class = 'CustomerPhone';
+    containerUserElement.appendChild(custPhone);
+
+    custName.innerText = name;
+    custMail.innerText = email;
+    custPhone.innerText = phone;
 }
 
 
