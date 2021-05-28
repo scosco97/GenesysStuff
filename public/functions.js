@@ -25,12 +25,13 @@ function addInfoTest(){
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             info = doc.data();
+            var divElement = document.createElement('div');
+            divElement.innerHTML = info.email+"\n"+info.phone+"\n"+info.firstName+"\n"+info.lastName;
+            document.body.appendChild(divElement);
         });
     })
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-    var divElement = document.createElement('div');
-    divElement.innerHTML = info.email+"\n"+info.phone+"\n"+info.firstName+"\n"+info.lastName;
-    document.body.appendChild(divElement);
+    
 }
