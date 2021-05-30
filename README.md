@@ -4,7 +4,7 @@
 INSTRUCTIONS:
 
  FOR CHAT FLOW TESTING: <br />
-    Admin -> Contact Center -> Widgets -> BullockWidget <br />
+    Admin -> Contact Center -> Widgets -> YourNameWidget <br />
     Set the Route to Flow : *Your Flow Name* <br />
     Test at https://genesysapi-3c7fc.firebaseapp.com/ 
 
